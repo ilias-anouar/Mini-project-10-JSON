@@ -27,8 +27,8 @@ function creatlist(jsonObj) {
     li.innerHTML = festivals[j];
     ul.appendChild(li);
   }
-    td.appendChild(ul);
-    return td
+  td.appendChild(ul);
+  return td;
 }
 // creat actors list
 function actors(jsonObj) {
@@ -42,8 +42,8 @@ function actors(jsonObj) {
     li.innerHTML = `${actors[j]["first-name"]} ${actors[j]["last-name"]},nationality:${actors[j]["nationality"]}`;
     ul.appendChild(li);
   }
-    td.appendChild(ul);
-    return td
+  td.appendChild(ul);
+  return td;
 }
 // load JSON file url
 let getpath = `/movies.json`;
@@ -58,3 +58,88 @@ get.onload = function () {
     creatrow(movies[i]);
   }
 };
+// sort
+function sortTablelow(n) {
+  let table, rows, switching, i, x, y, shouldSwitch, cont;
+  table = document.getElementById("table");
+  switching = true;
+  while (switching) {
+    switching = false;
+    rows = table.rows;
+    for (i = 1; i < rows.length - 1; i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("td")[n];
+      y = rows[i + 1].getElementsByTagName("td")[n];
+      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      cont++;
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+function sortTableup(n) {
+  let table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("table");
+  switching = true;
+  while (switching) {
+    switching = false;
+    rows = table.rows;
+    for (i = 1; i < rows.length - 1; i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("td")[n];
+      y = rows[i + 1].getElementsByTagName("td")[n];
+      if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+// head of the table
+let title, duration, Year;
+title = document.getElementById("title");
+duration = document.getElementById("duration");
+Year = document.getElementById("year");
+// click event
+// ::::::::::title sort:::::::::::::::
+title.addEventListener("click", function () {
+  span = document.getElementById("statuT");
+  if (span.innerHTML == '<i class="bi bi-caret-up"></i>') {
+    sortTablelow(0);
+    span.innerHTML = `<i class="bi bi-caret-down"></i>`;
+  } else if (span.innerHTML == '<i class="bi bi-caret-down"></i>') {
+    sortTableup(0);
+    span.innerHTML = `<i class="bi bi-caret-up"></i>`;
+  }
+});
+// ::::::::::::duration sort::::::::
+duration.addEventListener("click", function () {
+  span = document.getElementById("statuD");
+  if (span.innerHTML == '<i class="bi bi-caret-up"></i>') {
+    sortTablelow(2);
+    span.innerHTML = `<i class="bi bi-caret-down"></i>`;
+  } else if (span.innerHTML == '<i class="bi bi-caret-down"></i>') {
+    sortTableup(2);
+    span.innerHTML = `<i class="bi bi-caret-up"></i>`;
+  }
+});
+// :::::::::::::Year sort::::::::::
+Year.addEventListener("click", function () {
+  span = document.getElementById("statuY");
+  if (span.innerHTML == '<i class="bi bi-caret-up"></i>') {
+    sortTablelow(3);
+    span.innerHTML = `<i class="bi bi-caret-down"></i>`;
+  } else if (span.innerHTML == '<i class="bi bi-caret-down"></i>') {
+    sortTableup(3);
+    span.innerHTML = `<i class="bi bi-caret-up"></i>`;
+  }
+});
