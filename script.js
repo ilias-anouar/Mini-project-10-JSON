@@ -60,7 +60,7 @@ get.onload = function () {
 };
 // sort
 function sortTablelow(n) {
-  let table, rows, switching, i, x, y, shouldSwitch, cont;
+  let table, rows, switching, x, y, shouldSwitch, cont;
   table = document.getElementById("table");
   switching = true;
   while (switching) {
@@ -83,7 +83,7 @@ function sortTablelow(n) {
   }
 }
 function sortTableup(n) {
-  let table, rows, switching, i, x, y, shouldSwitch;
+  let table, rows, switching, x, y, shouldSwitch;
   table = document.getElementById("table");
   switching = true;
   while (switching) {
@@ -143,3 +143,28 @@ Year.addEventListener("click", function () {
     span.innerHTML = `<i class="bi bi-caret-up"></i>`;
   }
 });
+// searsh
+function searshtable() {
+  let table, rows, searshing, x, input, fond;
+  table = document.getElementById("table");
+  input = document.getElementById("input").value;
+  searshing = true;
+  while (searshing) {
+    searshing = false;
+    rows = table.rows;
+    for (i = 1; i < rows.length - 1; i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("td")[0];
+      if (x.innerHTML == input) {
+        fond = true;
+        break;
+      }
+    }
+      if (fond) {
+        document.scrollTo(rows[i])
+    }
+  }
+}
+// :::::input event:::::
+input = document.getElementById("input");
+input.addEventListener("input", searshtable());
