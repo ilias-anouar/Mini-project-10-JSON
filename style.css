@@ -1,0 +1,14 @@
+*{
+    box-sizing: border-box;
+}
+#me{
+    height: 70vh;
+    background-size: cover;
+    background-image: url(img/noom-peerapong-2uwFEAGUm6E-unsplash.jpg);
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+input{
+
+}
