@@ -9,10 +9,41 @@ function creatrow(Json) {
     <td>${Json["Director"]}</td>
     <td>${Json["Runtime"]}</td>
     <td>${Json["Year"]}</td>
-    <td><img src="posters/${Json["Title"]}.jpg" alt="movie poster"></td>
-    <td>${Json["festivals"]}</td>
-    <td>${Json["Actors"]}</td>`;
+    <td><img src="posters/${Json["Title"]}.jpg" alt="movie poster"></td>`;
+  creatlist(Json);
+  tr.appendChild(creatlist(Json));
+  tr.appendChild(actors(Json));
   table.appendChild(tr);
+}
+// creat festivale list
+function creatlist(jsonObj) {
+  let festivals, ul, li, td;
+  festivals = jsonObj["festivals"];
+  td = document.createElement("td");
+  ul = document.createElement("ul");
+  for (let j = 0; j < festivals.length; j++) {
+    li = document.createElement("li");
+    li.setAttribute("id", "li" + j);
+    li.innerHTML = festivals[j];
+    ul.appendChild(li);
+  }
+    td.appendChild(ul);
+    return td
+}
+// creat actors list
+function actors(jsonObj) {
+  let actors, ul, li, td;
+  td = document.createElement("td");
+  ul = document.createElement("ul");
+  actors = jsonObj["Actors"];
+  for (let j = 0; j < actors.length; j++) {
+    li = document.createElement("li");
+    li.setAttribute("id", "li" + j);
+    li.innerHTML = `${actors[j]["first-name"]} ${actors[j]["last-name"]},nationality:${actors[j]["nationality"]}`;
+    ul.appendChild(li);
+  }
+    td.appendChild(ul);
+    return td
 }
 // load JSON file url
 let getpath = `/movies.json`;
@@ -25,5 +56,5 @@ get.onload = function () {
   let movies = get.response;
   for (let i = 0; i < movies.length; i++) {
     creatrow(movies[i]);
-    }
+  }
 };
