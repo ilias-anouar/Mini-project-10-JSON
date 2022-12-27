@@ -144,7 +144,7 @@ Year.addEventListener("click", function () {
   }
 });
 // searsh in table and filtration
-// :::::input event:::::
+// :::::keyup event:::::
 inputsearch = document.getElementById("input");
 inputsearch.addEventListener("keyup", function () {
   let filter, table, row, data, dataValue;
