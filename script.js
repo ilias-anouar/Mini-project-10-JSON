@@ -1,5 +1,18 @@
+// load JSON file url
+let getpath = `/movies.json`;
+// create a query
+let get = new XMLHttpRequest();
+get.open("GET", getpath);
+get.responseType = "json";
+get.send();
+get.onload = function () {
+  let movies = get.response;
+  for (let i = 0; i < movies.length; i++) {
+    creatrow(movies[i]);
+  }
+};
 let table = document.getElementById("tbody");
-// creat Table
+// creating Rows
 let id = 0;
 function creatrow(Json) {
   id++;
@@ -15,7 +28,7 @@ function creatrow(Json) {
   tr.appendChild(actors(Json));
   table.appendChild(tr);
 }
-// creat festivale list
+// creating festivale list
 function creatlist(jsonObj) {
   let festivals, ul, li, td;
   festivals = jsonObj["festivals"];
@@ -30,7 +43,7 @@ function creatlist(jsonObj) {
   td.appendChild(ul);
   return td;
 }
-// creat actors list
+// creating actors list
 function actors(jsonObj) {
   let actors, ul, li, td;
   td = document.createElement("td");
@@ -45,19 +58,6 @@ function actors(jsonObj) {
   td.appendChild(ul);
   return td;
 }
-// load JSON file url
-let getpath = `/movies.json`;
-// create a query
-let get = new XMLHttpRequest();
-get.open("GET", getpath);
-get.responseType = "json";
-get.send();
-get.onload = function () {
-  let movies = get.response;
-  for (let i = 0; i < movies.length; i++) {
-    creatrow(movies[i]);
-  }
-};
 // sort
 function sortTablelow(n) {
   let table, rows, switching, x, y, shouldSwitch, cont;
@@ -143,28 +143,24 @@ Year.addEventListener("click", function () {
     span.innerHTML = `<i class="bi bi-caret-up"></i>`;
   }
 });
-// searsh
-function searshtable() {
-  let table, rows, searshing, x, input, fond;
+// searsh in table and filtration
+// :::::input event:::::
+inputsearch = document.getElementById("input");
+inputsearch.addEventListener("keyup", function () {
+  let filter, table, row, data, dataValue;
+  input = document.getElementById("input");
+  filter = inputsearch.value.toUpperCase();
   table = document.getElementById("table");
-  input = document.getElementById("input").value;
-  searshing = true;
-  while (searshing) {
-    searshing = false;
-    rows = table.rows;
-    for (i = 1; i < rows.length - 1; i++) {
-      shouldSwitch = false;
-      x = rows[i].getElementsByTagName("td")[0];
-      if (x.innerHTML == input) {
-        fond = true;
-        break;
+  row = table.getElementsByTagName("tr");
+  for (i = 0; i < row.length; i++) {
+    data = row[i].getElementsByTagName("td")[0];
+    if (data) {
+      dataValue = data.textContent || data.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        row[i].style.display = "";
+      } else {
+        row[i].style.display = "none";
       }
     }
-      if (fond) {
-        document.scrollTo(rows[i])
-    }
   }
-}
-// :::::input event:::::
-input = document.getElementById("input");
-input.addEventListener("input", searshtable());
+});
