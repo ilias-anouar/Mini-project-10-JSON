@@ -156,7 +156,7 @@ inputsearch.addEventListener("keyup", function () {
     data = row[i].getElementsByTagName("td")[0];
     if (data) {
       dataValue = data.textContent || data.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      if (dataValue.toUpperCase().indexOf(filter) > -1) {
         row[i].style.display = "";
       } else {
         row[i].style.display = "none";
