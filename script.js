@@ -20,8 +20,8 @@ function creatrow(Json) {
   tr.setAttribute("id", "tr" + id);
   tr.innerHTML = `<td>${Json["Title"]}</td>
     <td>${Json["Director"]}</td>
-    <td>${Json["Runtime"]}</td>
-    <td>${Json["Year"]}</td>
+    <td>${parseInt(Json["Runtime"])} min</td>
+    <td>${parseInt(Json["Year"])}</td>
     <td><img src="posters/${Json["Title"]}.jpg" alt="movie poster"></td>`;
   creatlist(Json);
   tr.appendChild(creatlist(Json));
@@ -58,7 +58,7 @@ function actors(jsonObj) {
   td.appendChild(ul);
   return td;
 }
-// sort
+// sort desc
 function sortTablelow(n) {
   let table, rows, switching, x, y, shouldSwitch, cont;
   table = document.getElementById("table");
@@ -82,6 +82,7 @@ function sortTablelow(n) {
     }
   }
 }
+// sort asc
 function sortTableup(n) {
   let table, rows, switching, x, y, shouldSwitch;
   table = document.getElementById("table");
