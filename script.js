@@ -20,7 +20,7 @@ function creatrow(Json) {
   tr.setAttribute("id", "tr" + id);
   tr.innerHTML = `<td>${Json["Title"]}</td>
     <td>${Json["Director"]}</td>
-    <td>${parseInt(Json["Runtime"])} min</td>
+    <td>${parseInt(Json["Runtime"])}</td>
     <td>${parseInt(Json["Year"])}</td>
     <td><img src="posters/${Json["Title"]}.jpg" alt="movie poster"></td>`;
   creatlist(Json);
@@ -105,6 +105,52 @@ function sortTableup(n) {
     }
   }
 }
+// sort Number desc
+function sortTableNumberDesc(n) {
+  let table, rows, switching, x, y, shouldSwitch;
+  table = document.getElementById("table");
+  switching = true;
+  while (switching) {
+    switching = false;
+    rows = table.rows;
+    for (i = 1; i < rows.length - 1; i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("td")[n];
+      y = rows[i + 1].getElementsByTagName("td")[n];
+      if (Number(x.innerHTML) < Number(y.innerHTML)) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+// sort Numbers asc
+function sortTableNumberAsc(n) {
+  let table, rows, switching, x, y, shouldSwitch;
+  table = document.getElementById("table");
+  switching = true;
+  while (switching) {
+    switching = false;
+    rows = table.rows;
+    for (i = 1; i < rows.length - 1; i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("td")[n];
+      y = rows[i + 1].getElementsByTagName("td")[n];
+      if (Number(x.innerHTML) > Number(y.innerHTML)) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
 // head of the table
 let title, duration, Year;
 title = document.getElementById("title");
@@ -126,10 +172,10 @@ title.addEventListener("click", function () {
 duration.addEventListener("click", function () {
   span = document.getElementById("statuD");
   if (span.innerHTML == '<i class="bi bi-caret-up"></i>') {
-    sortTablelow(2);
+    sortTableNumberAsc(2);
     span.innerHTML = `<i class="bi bi-caret-down"></i>`;
   } else if (span.innerHTML == '<i class="bi bi-caret-down"></i>') {
-    sortTableup(2);
+    sortTableNumberDesc(2);
     span.innerHTML = `<i class="bi bi-caret-up"></i>`;
   }
 });
@@ -137,10 +183,10 @@ duration.addEventListener("click", function () {
 Year.addEventListener("click", function () {
   span = document.getElementById("statuY");
   if (span.innerHTML == '<i class="bi bi-caret-up"></i>') {
-    sortTablelow(3);
+    sortTableNumberAsc(3);
     span.innerHTML = `<i class="bi bi-caret-down"></i>`;
   } else if (span.innerHTML == '<i class="bi bi-caret-down"></i>') {
-    sortTableup(3);
+    sortTableNumberDesc(3);
     span.innerHTML = `<i class="bi bi-caret-up"></i>`;
   }
 });
@@ -149,7 +195,6 @@ Year.addEventListener("click", function () {
 inputsearch = document.getElementById("input");
 inputsearch.addEventListener("keyup", function () {
   let filter, table, row, data, dataValue;
-  input = document.getElementById("input");
   filter = inputsearch.value.toUpperCase();
   table = document.getElementById("table");
   row = table.getElementsByTagName("tr");
