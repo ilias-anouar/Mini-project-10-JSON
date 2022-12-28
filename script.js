@@ -21,7 +21,7 @@ function creatrow(Json) {
   tr.innerHTML = `<td>${Json["Title"]}</td>
     <td>${Json["Director"]}</td>
     <td>${parseInt(Json["Runtime"])}</td>
-    <td>${parseInt(Json["Year"])}</td>
+    <td>${Json["Year"]}</td>
     <td><img src="posters/${Json["Title"]}.jpg" alt="movie poster"></td>`;
   creatlist(Json);
   tr.appendChild(creatlist(Json));
@@ -152,9 +152,10 @@ function sortTableNumberAsc(n) {
   }
 }
 // head of the table
-let title, duration, Year;
+let title, duration, Year, derector;
 title = document.getElementById("title");
 duration = document.getElementById("duration");
+derector = document.getElementById("director");
 Year = document.getElementById("year");
 // click event
 // ::::::::::title sort:::::::::::::::
@@ -187,6 +188,17 @@ Year.addEventListener("click", function () {
     span.innerHTML = `<i class="bi bi-caret-down"></i>`;
   } else if (span.innerHTML == '<i class="bi bi-caret-down"></i>') {
     sortTableNumberDesc(3);
+    span.innerHTML = `<i class="bi bi-caret-up"></i>`;
+  }
+});
+// :::::::::::::derector sort:::::::
+derector.addEventListener("click", function () {
+  span = document.getElementById("statuDr");
+  if (span.innerHTML == '<i class="bi bi-caret-up"></i>') {
+    sortTablelow(1);
+    span.innerHTML = `<i class="bi bi-caret-down"></i>`;
+  } else if (span.innerHTML == '<i class="bi bi-caret-down"></i>') {
+    sortTableup(1);
     span.innerHTML = `<i class="bi bi-caret-up"></i>`;
   }
 });
