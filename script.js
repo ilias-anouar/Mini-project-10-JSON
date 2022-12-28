@@ -217,7 +217,7 @@ inputsearch.addEventListener("keyup", function () {
       if (dataValue.toUpperCase().indexOf(filter) > -1) {
         row[i].style.display = "";
       } else {
-        row[i].style.display = "none";
+        row[i].style.display = "block";
       }
     }
   }
