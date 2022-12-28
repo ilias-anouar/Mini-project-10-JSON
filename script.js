@@ -12,7 +12,8 @@ get.onload = function () {
   }
 };
 let table = document.getElementById("tbody");
-// creating Rows
+
+// :::::::creating Rows::::::::
 let id = 0;
 function creatrow(Json) {
   id++;
@@ -28,7 +29,8 @@ function creatrow(Json) {
   tr.appendChild(actors(Json));
   table.appendChild(tr);
 }
-// creating festivale list
+
+// ::::::::creating festivale list:::::::::
 function creatlist(jsonObj) {
   let festivals, ul, li, td;
   festivals = jsonObj["festivals"];
@@ -43,7 +45,8 @@ function creatlist(jsonObj) {
   td.appendChild(ul);
   return td;
 }
-// creating actors list
+
+// ::::::::creating actors list::::::::::
 function actors(jsonObj) {
   let actors, ul, li, td;
   td = document.createElement("td");
@@ -58,7 +61,8 @@ function actors(jsonObj) {
   td.appendChild(ul);
   return td;
 }
-// sort desc
+
+// ::::::::::::sort desc:::::::::::::
 function sortTablelow(n) {
   let table, rows, switching, x, y, shouldSwitch, cont;
   table = document.getElementById("table");
@@ -82,7 +86,8 @@ function sortTablelow(n) {
     }
   }
 }
-// sort asc
+
+// ::::::::::sort asc:::::::::::::
 function sortTableup(n) {
   let table, rows, switching, x, y, shouldSwitch;
   table = document.getElementById("table");
@@ -105,6 +110,7 @@ function sortTableup(n) {
     }
   }
 }
+
 // sort Number desc
 function sortTableNumberDesc(n) {
   let table, rows, switching, x, y, shouldSwitch;
@@ -128,6 +134,7 @@ function sortTableNumberDesc(n) {
     }
   }
 }
+
 // sort Numbers asc
 function sortTableNumberAsc(n) {
   let table, rows, switching, x, y, shouldSwitch;
@@ -151,13 +158,16 @@ function sortTableNumberAsc(n) {
     }
   }
 }
+
 // head of the table
 let title, duration, Year, derector;
 title = document.getElementById("title");
 duration = document.getElementById("duration");
 derector = document.getElementById("director");
 Year = document.getElementById("year");
+
 // click event
+
 // ::::::::::title sort:::::::::::::::
 title.addEventListener("click", function () {
   span = document.getElementById("statuT");
@@ -169,6 +179,7 @@ title.addEventListener("click", function () {
     span.innerHTML = `<i class="bi bi-caret-up"></i>`;
   }
 });
+
 // ::::::::::::duration sort::::::::
 duration.addEventListener("click", function () {
   span = document.getElementById("statuD");
@@ -180,6 +191,7 @@ duration.addEventListener("click", function () {
     span.innerHTML = `<i class="bi bi-caret-up"></i>`;
   }
 });
+
 // :::::::::::::Year sort::::::::::
 Year.addEventListener("click", function () {
   span = document.getElementById("statuY");
@@ -191,6 +203,7 @@ Year.addEventListener("click", function () {
     span.innerHTML = `<i class="bi bi-caret-up"></i>`;
   }
 });
+
 // :::::::::::::derector sort:::::::
 derector.addEventListener("click", function () {
   span = document.getElementById("statuDr");
@@ -202,7 +215,9 @@ derector.addEventListener("click", function () {
     span.innerHTML = `<i class="bi bi-caret-up"></i>`;
   }
 });
+
 // searsh in table and filtration
+
 // :::::keyup event:::::
 inputsearch = document.getElementById("input");
 inputsearch.addEventListener("keyup", function () {
