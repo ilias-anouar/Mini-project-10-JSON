@@ -1,6 +1,6 @@
 // load JSON file url
 let getpath = `/movies.json`;
-// create a query
+// create a query 
 let get = new XMLHttpRequest();
 get.open("GET", getpath);
 get.responseType = "json";
