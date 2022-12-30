@@ -1,4 +1,12 @@
-// load JSON file url
+/**
+ * To load JSON data :
+ * use the XMLHttpRequest API (XHR).
+ * Open method to open a new request : .open(method, URL).
+ * using "GET" method since we just want to retrieve some data.
+ * Specify the response type to "JSON".
+ * Send the request with ".Send()" method.
+ */
+// JSON file path
 let getpath = `/movies.json`;
 // create a query 
 let get = new XMLHttpRequest();
@@ -6,13 +14,18 @@ get.open("GET", getpath);
 get.responseType = "json";
 get.send();
 get.onload = function () {
-  let movies = get.response;
-  for (let i = 0; i < movies.length; i++) {
-    creatrow(movies[i]);
+  let movies = get.response; // Store response in variable
+  for (let i = 0; i < movies.length; i++) { // Loop through variable
+    creatrow(movies[i]); // Call function to create row for for each element of response
   }
 };
-let table = document.getElementById("tbody");
 
+/**
+ * For saving JSON file response and make it readable :
+ * creating of HTML elements to display the response
+*/
+
+let table = document.getElementById("tbody");
 // :::::::creating Rows::::::::
 let id = 0;
 function creatrow(Json) {
@@ -24,11 +37,16 @@ function creatrow(Json) {
     <td>${parseInt(Json["Runtime"])}</td>
     <td>${Json["Year"]}</td>
     <td><img src="posters/${Json["Title"]}.jpg" alt="movie poster"></td>`;
-  creatlist(Json);
-  tr.appendChild(creatlist(Json));
+  tr.appendChild(creatlist(Json)); // For the complex elements : calling another function to save them
   tr.appendChild(actors(Json));
   table.appendChild(tr);
 }
+
+/**
+ * Function for the complex elements :
+ * To create list of festivals and actors.
+ * The return is a HTML table cell element.
+ */
 
 // ::::::::creating festivale list:::::::::
 function creatlist(jsonObj) {
@@ -61,10 +79,17 @@ function actors(jsonObj) {
   td.appendChild(ul);
   return td;
 }
-
+/**
+ * Sort functions :
+ * To sort "str" and "int" => two deferent function in ASC & DESC way :
+ * Function for "ACS".
+ * Function for "DESC".
+ * (for both types "str" & "int").
+ * Add ("n") as param to Specify the index of colomn to sort.
+ */
 // ::::::::::::sort desc:::::::::::::
 function sortTablelow(n) {
-  let table, rows, switching, x, y, shouldSwitch, cont;
+  let table, rows, switching, x, y, shouldSwitch;
   table = document.getElementById("table");
   switching = true;
   while (switching) {
@@ -123,7 +148,7 @@ function sortTableNumberDesc(n) {
       shouldSwitch = false;
       x = rows[i].getElementsByTagName("td")[n];
       y = rows[i + 1].getElementsByTagName("td")[n];
-      if (Number(x.innerHTML) < Number(y.innerHTML)) {
+      if (Number(x.innerHTML) < Number(y.innerHTML)) {  // add Number to the function to specify the sort
         shouldSwitch = true;
         break;
       }
@@ -147,7 +172,7 @@ function sortTableNumberAsc(n) {
       shouldSwitch = false;
       x = rows[i].getElementsByTagName("td")[n];
       y = rows[i + 1].getElementsByTagName("td")[n];
-      if (Number(x.innerHTML) > Number(y.innerHTML)) {
+      if (Number(x.innerHTML) > Number(y.innerHTML)) { // add Number to the function to specify the sort
         shouldSwitch = true;
         break;
       }
@@ -159,7 +184,7 @@ function sortTableNumberAsc(n) {
   }
 }
 
-// head of the table
+// head of the table variables
 let title, duration, Year, derector;
 title = document.getElementById("title");
 duration = document.getElementById("duration");
@@ -216,23 +241,27 @@ derector.addEventListener("click", function () {
   }
 });
 
-// searsh in table and filtration
+/**
+ * Searsh in table and filtration : 
+ * Add "KEYUP" event to input => with a function :
+ * To check data and filte the table.
+ */
 
 // :::::keyup event:::::
 inputsearch = document.getElementById("input");
 inputsearch.addEventListener("keyup", function () {
-  let filter, table, row, data, dataValue;
-  filter = inputsearch.value.toUpperCase();
+  let filter, table, row, data, dataValue; // Variables that will be used.
+  filter = inputsearch.value.toUpperCase(); // Store input value in a variable => "ToUppECase".
   table = document.getElementById("table");
-  row = table.getElementsByTagName("tr");
-  for (i = 0; i < row.length; i++) {
-    data = row[i].getElementsByTagName("td")[0];
+  row = table.getElementsByTagName("tr"); // All table row elements
+  for (i = 0; i < row.length; i++) { // Loop through all rows
+    data = row[i].getElementsByTagName("td")[0]; // Get the first table cell element 
     if (data) {
-      dataValue = data.textContent || data.innerText;
-      if (dataValue.toUpperCase().indexOf(filter) > -1) {
-        row[i].style.display = "";
+      dataValue = data.innerText; 
+      if (dataValue.toUpperCase().indexOf(filter) > -1) {  // Check if TD innerText index of input value => if false : -1 ; if True : 1 || 0
+        row[i].style.display = ""; // Keep the Row That return : True
       } else {
-        row[i].style.display = "none";
+        row[i].style.display = "none"; // hide The Row That return : False
       }
     }
   }
