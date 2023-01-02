@@ -105,7 +105,6 @@ function sortTablelow(n) {
       }
     }
     if (shouldSwitch) {
-      cont++;
       rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
       switching = true;
     }
