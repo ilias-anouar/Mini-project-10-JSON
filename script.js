@@ -250,7 +250,7 @@ derector.addEventListener("click", function () {
 inputsearch = document.getElementById("input");
 inputsearch.addEventListener("keyup", function () {
   let filter, table, row, data, dataValue; // Variables that will be used.
-  filter = inputsearch.value.toUpperCase(); // Store input value in a variable => "ToUppECase".
+  filter = inputsearch.value.toUpperCase(); // Store input value in a variable => "ToUpperCase".
   table = document.getElementById("table");
   row = table.getElementsByTagName("tr"); // All table row elements
   for (i = 0; i < row.length; i++) { // Loop through all rows
