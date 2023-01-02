@@ -16,7 +16,7 @@ get.send();
 get.onload = function () {
   let movies = get.response; // Store response in variable
   for (let i = 0; i < movies.length; i++) { // Loop through variable
-    creatrow(movies[i]); // Call function to create row for for each element of response
+    creatrow(movies[i]); // Call function to create row for for each element in response
   }
 };
 
