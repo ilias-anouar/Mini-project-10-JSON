@@ -171,7 +171,7 @@ function sortTableNumberAsc(n) {
       shouldSwitch = false;
       x = rows[i].getElementsByTagName("td")[n];
       y = rows[i + 1].getElementsByTagName("td")[n];
-      if (Number(x.innerHTML) > Number(y.innerHTML)) { // add Number to the function to specify the sort
+      if (Number(x.innerHTML) > Number(y.innerHTML)) { // add Number to the function to specify the sort for Int
         shouldSwitch = true;
         break;
       }
