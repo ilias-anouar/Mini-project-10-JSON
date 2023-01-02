@@ -258,7 +258,7 @@ inputsearch.addEventListener("keyup", function () {
     if (data) {
       dataValue = data.innerText; 
       if (dataValue.toUpperCase().indexOf(filter) > -1) {  // Check if TD innerText index of input value => if false : -1 ; if True : 1 || 0
-        row[i].style.display = ""; // Keep the Row That return : True
+        row[i].style.display = "table-row"; // Keep the Row That return : True
       } else {
         row[i].style.display = "none"; // hide The Row That return : False
       }
